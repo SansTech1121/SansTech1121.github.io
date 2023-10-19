@@ -46,9 +46,8 @@ body{
     margin: auto;
     margin-right: 5px;
     margin-left: 5px;
-    color: hwb(0 100% 0%);
+    color: #ffffff;
     font-weight: bold;
-
 }
 .TopBarItemGroup{
     display: grid;
@@ -58,7 +57,7 @@ body{
     margin: auto;
     margin-right: 5px;
     margin-left: 5px;
-    color: hwb(0 100% 0%);
+    color: #ffffff;
     font-weight: bold;
 
 }
