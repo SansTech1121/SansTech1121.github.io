@@ -35,7 +35,9 @@
                 <div class="sidebar">
                     <div class="TitleBar">
                         <img src="../assets/img/logo1.png">
-                        <NuxtLink class="titlelink" to="/">KllWebApplication</NuxtLink>
+                        <NuxtLink class="titlelink" to="/">
+                            <a>KLL WEB APPLICATION</a>
+                        </NuxtLink>
                     </div>
                     <div class="MenuBar">
                         <div id="app">

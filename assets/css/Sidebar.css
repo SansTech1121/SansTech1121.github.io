@@ -80,9 +80,12 @@ body{
     height: auto;
 }
 .titlelink{
-    color: hwb(0 100% 0%);
-    font-weight: bold;
     margin: auto;
+}
+.titlelink a{
+    color: #ffffff;
+    font-weight: bold;
+
 }
 .TitleBar img{
     width: 20%;
