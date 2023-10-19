@@ -1,0 +1,212 @@
+.SinglePage{
+    display: grid;
+    grid-template-columns:247px auto;
+}
+.BoxField{
+    position:relative;
+    margin: auto;
+    width: 100%;
+    height: auto;
+    border: solid 2px #000000;
+    top: 45px;
+}
+ @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+*{
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    
+}
+body{
+    background: #f5f6fa;
+}
+.TopBar{
+    display: flex;
+    background: rgba(106, 106, 106, 1);
+    position: fixed;
+    top: 0;
+    left: 250px;
+    width: 100%;
+    height: 50px;
+    transition: all 0.5s ease;
+    text-align: left;
+    padding: 15px;
+}
+.TopBarItem{
+    display: flex;
+    height: 100%;
+    margin: auto;
+    width: 100%;
+}
+.TopBarItem a{
+    margin: auto;
+    margin-right: 5px;
+    margin-left: 5px;
+    color: hwb(0 100% 0%);
+    font-weight: bold;
+
+}
+.TopBarItemGroup{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.TopBarItemGroup a{
+    margin: auto;
+    margin-right: 5px;
+    margin-left: 5px;
+    color: hwb(0 100% 0%);
+    font-weight: bold;
+
+}
+.TopBarItemGroup svg{
+    fill: #ffffff;
+}
+.wrapper .sidebar{
+    background: rgba(106, 106, 106, 0.75);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    transition: all 0.5s ease;
+}
+.TitleBar{
+    display: flex;
+    background: rgba(106, 106, 106, 1);
+    text-align: center;
+    height: auto;
+}
+.titlelink{
+    color: hwb(0 100% 0%);
+    font-weight: bold;
+    margin: auto;
+}
+.TitleBar img{
+    width: 20%;
+    height: 40%;
+    margin: auto;
+    text-align: center;
+}
+.MenuBar{
+    border-radius: 5px;
+    border: solid 2px #a5a5a5;
+    width: 100%;
+    height: auto;
+    margin: auto;
+    text-align: center;
+    background: #ffffff;
+    padding: 5px;
+}
+.NavMenuItem{
+    display: flex;
+}
+.NavMenuItem:hover{
+    background: hsl(0, 0%, 81%);
+
+}
+.ClickCollapseBtn{
+    display: grid;
+    grid-template-columns: 50px auto;
+    background: hwb(0 100% 0%);
+    cursor: pointer;
+    width: 90%;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 2px;
+    border: #00000000;
+    padding: 0px;
+    border-radius: 7px;
+    
+}
+.ClickCollapseBtn a{
+    color: #000000;
+    text-align: left;
+    font-size: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.ClickCollapseBtn svg{
+    margin: auto;
+    text-align: left;
+    height: auto;
+
+}
+.ClickCollapseBtn:active{
+    background: hsl(0, 0%, 81%);
+}
+
+.ClickCollapseBtn:hover{
+    background: hsl(0, 0%, 81%);
+}
+
+.ClickedsingleBtn{
+    display: grid;
+    grid-template-columns: 50px auto;
+    background: hwb(0 100% 0%);
+    cursor: pointer;
+    width: 90%;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 2px;
+    border: #00000000;
+    padding: 0px;
+    border-radius: 7px;
+}
+.ClickedsingleBtn a{
+    text-align: left;
+    color: #000000;
+    font-size: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.ClickedsingleBtn svg{
+    margin: auto;
+    text-align: left;
+    height: auto;
+
+}
+
+.ClickedsingleBtn:hover{
+    background: hsl(0, 0%, 81%);
+}
+.DashbordBtn{
+    display: grid;
+    grid-template-columns: 50px auto;
+    background: hwb(0 100% 0%);
+    cursor: pointer;
+    width: 90%;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 2px;
+    border: #00000000;
+    padding: 0px;
+    padding-left: 30px;
+    border-radius: 7px;
+
+}
+.DashbordBtn a{
+    text-align: left;
+    color: #000000;
+    font-size: 18px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.DashbordBtn svg{
+    margin: auto;
+    text-align: left;
+    height: auto;
+
+}
+.DashbordBtn:hover{
+    background: hsl(0, 0%, 81%);
+}
+.DashbordBtn:active{
+    background: hsl(0, 0%, 81%);
+}
+.DashbordBtn a:hover{
+    color: #ffffff;
+}
