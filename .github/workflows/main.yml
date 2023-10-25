@@ -21,9 +21,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build and Test
-        run: npm run build
-
       - name: Activate Syncfusion License
         run: |
           # Activate Syncfusion License
