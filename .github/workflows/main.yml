@@ -15,8 +15,7 @@ jobs:
           node-version: 14
         
       - name: Install node modules
-          cd  /home/runner/work/
-        run: npm install
+        run: npm install npm@latest -g
 
       - name: Build and Test
         run: npm run build
