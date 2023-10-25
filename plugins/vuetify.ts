@@ -10,5 +10,5 @@ export default defineNuxtPlugin((app) => {
         VDatePicker
       },
   })
-  app.vueApp.use(vuetify,PrimeVue)
+  app.vueApp.use(vuetify , PrimeVue)
 })
