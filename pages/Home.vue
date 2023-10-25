@@ -1,18 +1,34 @@
 <template>
-    <title>Home</title>
-    <div class="BaseContainer">
-        <h1>Welcome</h1>
+  <title>HOME</title>
+  <div >
+    <v-carousel height="auto" cycle show-arrows="hover">
+  <v-carousel-item cover>
+  <img class="ImgBox" src="../assets/img/ImageSlider/PIC (1).jpg">
+  </v-carousel-item>
+
+  <v-carousel-item cover>
+  <img class="ImgBox" src="../assets/img/ImageSlider/PIC (2).jpg">
+  </v-carousel-item>
+
+  <v-carousel-item cover>
+  <img class="ImgBox" src="../assets/img/ImageSlider/PIC (3).jpg">
+  </v-carousel-item>
+
+  <v-carousel-item cover>
+  <img class="ImgBox" src="../assets/img/ImageSlider/PIC (4).jpg">
+  </v-carousel-item>
+
+</v-carousel>
     </div>
 </template>
 
 <script >
-    definePageMeta({
+      definePageMeta({
         layout:'sidebar'
     })
+  
 </script>
 
-<style scoped>
-.BaseContainer{
-    height: 300px;
-}
+<style >
+@import '~/assets/css/Home.css';
 </style>

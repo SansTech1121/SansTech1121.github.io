@@ -47,22 +47,33 @@
                                 </NuxtLink>
                             </div>
                             <div class="CollapseBtn">
-                                <NuxtLink class="ClickCollapseBtn" v-on:click="toggleDiv()">
+                                <NuxtLink class="ClickCollapseBtn" v-on:click="ToogleDashboardDiv()">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M160 80c0-26.5 21.5-48 48-48h32c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V80zM0 272c0-26.5 21.5-48 48-48H80c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V272zM368 96h32c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H368c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48z"/></svg>
                                     <a>DASHBOARD</a>
                                 </NuxtLink>
-                                <NuxtLink class="DashbordBtn" v-if="display_div" to="/Dashboard/Inbound/BaseInboundDashboard">
+                                <NuxtLink class="DashbordBtn" v-if="Dashboard_DIV" to="/Dashboard/Inbound/BaseInboundDashboard">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><path d="M48 0C21.5 0 0 21.5 0 48V368c0 26.5 21.5 48 48 48H64c0 53 43 96 96 96s96-43 96-96H384c0 53 43 96 96 96s96-43 96-96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V288 256 237.3c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7H416V48c0-26.5-21.5-48-48-48H48zM416 160h50.7L544 237.3V256H416V160zM112 416a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm368-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
                                     <a>INBOUND</a>
                                 </NuxtLink>
                             </div>
+                            <div class="CollapseBtn">
+                                <NuxtLink class="ClickCollapseBtn" v-on:click="ToggleDcHealthDiv()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M160 80c0-26.5 21.5-48 48-48h32c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V80zM0 272c0-26.5 21.5-48 48-48H80c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V272zM368 96h32c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H368c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48z"/></svg>
+                                    <a>DC HEALTH</a>
+                                </NuxtLink>
+                                <NuxtLink class="DashbordBtn" v-if="DcHealth_DIV" to="/Dashboard/Inbound/BaseInboundDashboard">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><path d="M48 0C21.5 0 0 21.5 0 48V368c0 26.5 21.5 48 48 48H64c0 53 43 96 96 96s96-43 96-96H384c0 53 43 96 96 96s96-43 96-96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V288 256 237.3c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7H416V48c0-26.5-21.5-48-48-48H48zM416 160h50.7L544 237.3V256H416V160zM112 416a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm368-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
+                                    <a>Summary</a>
+                                </NuxtLink>
+                            </div>
+
+
                             <div class="Singlebtn">
                                 <NuxtLink  class="ClickedsingleBtn" @click="Logoutbtn" to="/">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/></svg>                                    
                                     <a>LOGOUT</a>
                                 </NuxtLink>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -81,7 +92,8 @@ const GetWhseidstr = 'api/Facility/GetBiuName/';
 export default {
     data: () => ({
         name: 'App',
-        display_div: false,
+        Dashboard_DIV: false,
+        DcHealth_DIV: false,
         Name:'',
         Site:'',
         WHSEID:'',
@@ -103,8 +115,11 @@ export default {
                     const dateTime = date +' '+ time;
                     this.timestamp = dateTime;
                 },
-        toggleDiv: function() {
-                this.display_div = !this.display_div;
+        ToogleDashboardDiv: function() {
+                this.Dashboard_DIV = !this.Dashboard_DIV;
+            }, 
+            ToggleDcHealthDiv: function(){
+                this.DcHealth_DIV = !this.DcHealth_DIV;
             },
         async FisrApper()
         {

@@ -2,7 +2,7 @@
     <head>
         <title>Login Form</title>
     </head>
-    <div class="formlogin">
+    <v-app class="formlogin">
         <form>
 		<div class="body"></div>
 		<div class="grad"></div>
@@ -15,16 +15,14 @@
 			<input type="text" placeholder="UserId" v-model="UserId"  @keyup.enter.prevent="handleEnterKey"><br>
 			<input type="text" placeholder="UserName" id="Usernametxt" v-model="FirstName" readonly="readonly" /> <br>
 			<input type="password" placeholder="Password" v-model="Passwordtxt" id="Passwordtxt" /> <br>
-			<select v-model="Biu">
-                <option value="Select" disabled selected>Select Facility</option>
-				<option v-for="detail in Facility" :value="detail.SITE_NAME">
-                {{ detail.SITE_NAME }}
-                </option>
-			</select>
-            <button type="button" @click="Lognbtnclick">LOGIN</button>
+			<v-select class="select" v-model="Biu" label="Select Facility" :hint="` ${Biu.SITE_NAME}`"  :items="Facility" item-value="SITE_NAME" item-title="SITE_NAME"  return-object >
+			</v-select>
+            <button type="button" @click="Lognbtnclick">LOGIN
+            
+            </button>
 		</div>
 	</form>
-    </div>	
+    </v-app>	
 </template> 
 
 <script>
@@ -36,13 +34,15 @@
     const GetWebFacility = 'api/Facility/GetWebFacility';
 
 export default {
+    
     data: () => ({
         UserId : '',
         Passwordtxt : '',
         userinfomartin:{},
         FirstName:"",
         Facility:[],
-        Biu:''
+        bindingfaciity:[],
+        Biu:{SITE_NAME:''},
         }),
 methods: {
 
@@ -74,6 +74,11 @@ methods: {
     {
         await axios.get(BaseUrl + GetWebFacility).then(response =>{
                 this.Facility = response.data ;
+
+                for(var item in this.facility)
+                {
+                    this.bindingfaciity = item.SITE_NAME
+                };
             })
     },
 
@@ -100,7 +105,15 @@ methods: {
 
     async Lognbtnclick()
     {
-        const getlogin = {
+
+        if (this.Biu == "")
+        {
+            alert("MOHON PILIH FACILITY");
+            this.FirstName = "Select Facility";
+        }
+        else
+        {
+            const getlogin = {
             Userid : this.UserId,
             Password : this.Passwordtxt
         };
@@ -111,20 +124,22 @@ methods: {
                 if (dataresult == "LOGIN SUCCESS")
                 {
                     this.savedatalogin.call();
-                    navigateTo("../Home");
+                    navigateTo('../Home', );
                 }
                 else
                 {
-                    this.FirstName = "LOGIN FAILED";
+                    alert("USER/PASSWORD SALAH");
                 }        
         });
+
+        }
     },
     async savedatalogin()
     {
         localStorage.setItem("Userid",this.UserId);
         localStorage.setItem("Password",this.Passwordtxt);
         localStorage.setItem("Username",this.FirstName);
-        localStorage.setItem("Site",this.Biu);
+        localStorage.setItem("Site",this.Biu.SITE_NAME);
     },
     async FisrApper()
     {
@@ -138,11 +153,11 @@ methods: {
                 const dataresult = response.data;
                 if (dataresult == "LOGIN SUCCESS")
                 {
-                    navigateTo("../Home");
+                    navigateTo('../Home', );
                 }
                 else
                 {
-                    this.FirstName = "LOGIN FAILED";
+                    
                 }        
             })
         }

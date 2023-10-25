@@ -1,0 +1,12 @@
+.ContainerBox{
+    height: auto;
+}
+.ContainerBoxItem{
+    height: auto;
+}
+
+.ImgBox{
+    width: 100%;
+    height: 850px;
+    border-radius: 15px;
+}

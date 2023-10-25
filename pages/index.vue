@@ -2,7 +2,7 @@
     <head>
         <meta http-equiv="refresh" content="3;url=Login/LoginForm" />
     </head>
-    <div class="ApperBox">
+    <v-app class="ApperBox">
         <div class="boxes">
         <div class="box">
             <div></div>
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    </div>
+    </v-app >
 </template>
 
 <script setup>
