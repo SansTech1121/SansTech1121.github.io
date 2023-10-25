@@ -1,27 +1,8 @@
-name: Build and Deploy
+  steps:
+    - name: Install Dependencies
+      run: npm install
 
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Activate Syncfusion License
-        run: npx syncfusion-license activate
+    - name: Activate Syncfusion License
+      run: npx syncfusion-license activate
         env:
           SYNCFUSION_LICENSE: $
