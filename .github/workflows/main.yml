@@ -22,9 +22,6 @@ jobs:
         run: npm install
 
       - name: Activate Syncfusion License
-        run: |
-          # Activate Syncfusion License
-          echo ${{ secrets.SYNCFUSION_LICENSE }} > syncfusion-license.txt
-          npx syncfusion-javascript
+        run: npx syncfusion-license activate
         env:
-          SYNFUSION_LICENSE_KEY: ${{ secrets.SYNCFUSION_LICENSE_KEY }}
+          SYNCFUSION_LICENSE: $
