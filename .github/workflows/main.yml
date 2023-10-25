@@ -1,8 +1,11 @@
-  steps:
-    - name: Install Dependencies
-      run: npm install
-
-    - name: Activate Syncfusion License
-      run: npx syncfusion-license activate
-        env:
-          SYNCFUSION_LICENSE: $
+- name: Setup Node.js environment
+  uses: actions/setup-node@v4.0.0
+  with:  
+    steps:
+          - name: Install Dependencies
+            run: npm install
+      
+          - name: Activate Syncfusion License
+            run: npx syncfusion-license activate
+              env:
+                SYNCFUSION_LICENSE: $
