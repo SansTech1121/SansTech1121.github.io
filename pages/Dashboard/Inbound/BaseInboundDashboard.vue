@@ -236,4 +236,4 @@ import {ChartComponent, SeriesCollectionDirective, SeriesDirective,BarSeries ,Ca
 
 <style>
 @import '~/assets/css/inboundBase.css'; 
-</style>
+</style>    
