@@ -36,8 +36,5 @@ export default defineNuxtConfig({
         transformAssetUrls,
       },
     },
-    plugins: [
-      { src: '~/plugins/index.js', ssr: false },
-    ],
   },
 })
