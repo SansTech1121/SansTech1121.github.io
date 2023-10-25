@@ -15,7 +15,7 @@ jobs:
           node-version: 14
         
       - name: Install node modules
-          cd  /home/runner/work/SansTech1121.github.io/
+          cd  /home/runner/work/
         run: npm install
 
       - name: Build and Test
