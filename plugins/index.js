@@ -1,7 +1,12 @@
-import Vue from 'vue'
-import { registerLicense } from '@syncfusion/ej2-base';
+// nuxt.config.js
 
-// Registering Syncfusion license key.
-registerLicense('Ngo9BigBOggjHTQxAR8/V1NHaF5cWWFCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdgWH9cdXRSRGldUE1yXEI=');
-// Component: <ClientOnly>
-Vue.component(ClientOnly.name, ClientOnly)
+import * as syncfusion from '@syncfusion/ej2-base';
+
+syncfusion.License.registerLicense('ORg4AjUWIQA/Gnt2VlhhQlVFfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn9TdEBjXH1fcnZWT2VV');
+
+export default {
+  // Other Nuxt.js configuration options
+  serverMiddleware: [
+    // Add your server middleware if needed
+  ],
+};

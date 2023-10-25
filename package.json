@@ -27,6 +27,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "@mdi/font": "^7.3.67",
+    "@syncfusion/ej2": "^23.1.42",
     "@syncfusion/ej2-vue-charts": "^23.1.42",
     "axios": "^1.5.1",
     "font-awesome": "^4.7.0",
