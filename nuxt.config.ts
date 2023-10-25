@@ -18,31 +18,9 @@ export default defineNuxtConfig({
         // @ts-expect-error
         config.plugins.push(vuetify({ autoImport: true }))
       })
-    },'nuxt-primevue'
+    }
     //...
   ],
-  primevue: { 
-    usePrimeVue: true,
-    options: {},
-    components: {
-        prefix: '',
-        name: undefined,
-        include: undefined,
-        exclude: undefined
-    },
-    directives: {
-        prefix: '',
-        name: undefined,
-        include: undefined,
-        exclude: undefined
-    },
-    composables: {
-        prefix: '',
-        name: undefined,
-        include: undefined,
-        exclude: undefined
-    }
-},
   vite: {
     optimizeDeps: {
       include:
