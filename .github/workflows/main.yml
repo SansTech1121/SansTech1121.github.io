@@ -1,11 +1,19 @@
-- name: Setup Node.js environment
-  uses: actions/setup-node@v4.0.0
-  with:  
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: self-hosted
+
     steps:
-          - name: Install Dependencies
-            run: npm install
-      
-          - name: Activate Syncfusion License
-            run: npx syncfusion-license activate
-              env:
-                SYNCFUSION_LICENSE: $
+      - name: Install node modules
+        run: npm install
+    
+      - name: Activate Syncfusion License
+        run: npx syncfusion-license activate
+        env:
+          SYNCFUSION_LICENSE: $
