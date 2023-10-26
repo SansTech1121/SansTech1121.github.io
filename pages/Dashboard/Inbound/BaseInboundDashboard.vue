@@ -87,9 +87,10 @@
                             </div>
                             <div class="Card-Body-Chart" style="display:flex;" >
                                 <div class="Chartbox" >
-                                    <ejs-chart id="container" :primaryXAxis='primaryXAxis'>
+                                    <ejs-chart id="container" :primaryXAxis='primaryXAxis' :legendSettings='legendSettings'>
                                         <e-series-collection>
-                                            <e-series :dataSource='this.WorkingProgressBaseTrans' type='Bar' xName='LIST_PROCESS' yName='VALUE' name='IMPORT'> </e-series>
+                                            <e-series :dataSource='this.WorkingProgressImport' type='Bar' xName='LIST_PROCESS' yName='VALUE' name='IMPORT' :marker='marker'> </e-series>
+                                            <e-series :dataSource='this.WorkingProgressLocal' type='Bar' xName='LIST_PROCESS' yName='VALUE' name='LOCAL' :marker='marker'> </e-series>
                                         </e-series-collection>
                                     </ejs-chart>
                                 </div>
@@ -122,23 +123,25 @@
                                     <div class="Chart-Body-Achivement">
                                         <div class="Achiment-Item"> 
                                             <a class="Header-Achivemnt">PROCESS</a>
-                                            <a class="Content-Achivemnt">HASIL</a>
+                                            <a class="Content-Achivemnt">{{ ACHIVEMENT_UNLOADING.PROCESS }}</a>
                                         </div>                                
                                         <div class="Achiment-Item">
                                             <a class="Header-Achivemnt">DONE</a>
-                                            <a class="Content-Achivemnt">HASIL</a>
+                                            <a class="Content-Achivemnt">{{ ACHIVEMENT_UNLOADING.DONE }}</a>
 
                                         </div>                                
                                         <div class="Achiment-Item">
                                             <a class="Header-Achivemnt">TOTAL</a>
-                                            <a class="Content-Achivemnt">HASIL</a>
+                                            <a class="Content-Achivemnt">{{ ACHIVEMENT_UNLOADING.TOTAL }}</a>
                                         </div>
                                     </div>
 
                                         <div class="Box-percentage">
                                             <a class="Header-Achivemnt">PERCENTAGE</a>
                                             <br/>
-                                            <a>PROGRESS BAR</a>
+                                            <v-progress-circular :rotate="360" :size="160" :width="30" :model-value="this.ACHIVEMENT_UNLOADING.PERCENTAGE" color="teal">
+                                            <template v-slot:default> {{ this.ACHIVEMENT_UNLOADING.PERCENTAGE }} % </template>
+                                            </v-progress-circular>
                                         </div>
                                 
                             </div>
@@ -164,7 +167,7 @@
 import { defineComponent } from "vue";
 import { NDatePicker } from "naive-ui";
 import axios from 'axios';
-import {ChartComponent, SeriesCollectionDirective, SeriesDirective,BarSeries ,Category } from "@syncfusion/ej2-vue-charts";
+import {ChartComponent, SeriesCollectionDirective, SeriesDirective,BarSeries ,Category ,DataLabel ,Legend } from "@syncfusion/ej2-vue-charts";
 
     const BaseUrl = 'https://apiblazor.sanstech.online/';
     const BASE_UNLOADING_FETCH_DATA = 'API/HCI/INBOUND/InboundSpRunning/&aqoonsiHCIJBK/&TAARIIKHDA';
@@ -195,17 +198,37 @@ import {ChartComponent, SeriesCollectionDirective, SeriesDirective,BarSeries ,Ca
         MPP : ''
       }],
     ImportCircular: true,
-    WorkingProgressBaseTrans:[{
+    WorkingProgressImport:[{
         LIST_PROCESS:'',
-        VALUE: Float32Array,
+        VALUE: '',
         FILL:''
+    }],
+    WorkingProgressLocal:[{
+        LIST_PROCESS:'',
+        VALUE: '',
+        FILL:''
+    }],
+    ACHIVEMENT_UNLOADING:[{
+        DONE:'',
+        PROCESS:'',
+        TOTAL:'',
+        PERCENTAGE:Number,
     }],
     primaryXAxis: {
            valueType: 'Category'
-        }    
+        },
+        marker: {
+                    //Data label for chart series
+                    dataLabel: { visible: true }
+                },
+                legendSettings: {
+                visible: true,
+                position: 'Custom',
+                location: { x: 410, y: 10 }
+        },
     }),
     provide:{
-        chart: [BarSeries ,Category]
+        chart: [BarSeries ,Category ,DataLabel ,Legend ]
     },
     methods:{
         FirstApper()
@@ -221,7 +244,13 @@ import {ChartComponent, SeriesCollectionDirective, SeriesDirective,BarSeries ,Ca
                     this.ImportCircular = false;
             }),
             await axios.get(BaseUrl + BASE_UNLOADING_FETCH_DATA + this.formattedValue + '/&XULASHADATALOImport/&PARAAMETER2/').then(response =>{
-                this.WorkingProgressBaseTrans = response.data;
+                this.WorkingProgressImport = response.data;
+            }),
+            await axios.get(BaseUrl + BASE_UNLOADING_FETCH_DATA + this.formattedValue + '/&XULASHADATALOLocal/&PARAAMETER2/').then(response =>{
+                this.WorkingProgressLocal = response.data;
+            }),
+            await axios.get(BaseUrl + BASE_UNLOADING_FETCH_DATA + this.formattedValue + '/&XULASHADATALOImport/&PARAAMETER3/').then(response =>{
+                this.ACHIVEMENT_UNLOADING = response.data[0];
             })
             
         }
