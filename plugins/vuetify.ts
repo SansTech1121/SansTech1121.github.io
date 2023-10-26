@@ -6,8 +6,8 @@ export default defineNuxtPlugin((app) => {
   const vuetify = createVuetify({
     // ... your configuration
     components: {
-        VDatePicker
-      },
+      VDatePicker
+      }
   })
   app.vueApp.use(vuetify)
-});
+})
