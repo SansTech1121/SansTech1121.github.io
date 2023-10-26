@@ -9,11 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v4.0.0
-        with:
-          node-version: 14
-        
       - name: Install node modules
         run: npm install
 
