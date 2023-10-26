@@ -8,7 +8,7 @@ export default defineNuxtConfig({
         '@css-render/vue3-ssr',
         '@juggle/resize-observer'
       ]
-    : ['@juggle/resize-observer'] & ['vuetify']
+    : ['@juggle/resize-observer'] && ['vuetify']
   },
   
   modules: [
