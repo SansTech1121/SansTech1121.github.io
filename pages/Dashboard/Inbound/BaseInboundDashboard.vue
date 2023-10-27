@@ -6,6 +6,7 @@
             v-model="tab"
             bg-color="#000000"
             align-tabs="center"
+            
             >
             <v-tab value="one">UNLOADING</v-tab>
             <v-tab value="two">PUTAWAY</v-tab>
@@ -21,11 +22,11 @@
                 />
             </div>
                     <div class="datepicker-btn">
-                        <button type="submit" >REFRESH</button>
+                        <button type="submit" @click="RefrshBtn">REFRESH</button>
                     </div>
             <v-card-text>
-            <v-window v-model="tab">
-                <v-window-item value="one">
+            <v-window  v-model="tab">
+                <v-window-item value="one" >
                     <div class="Grid-Panel-1">
                     <div class="Grid-Container-1">
 
@@ -35,13 +36,13 @@
                             PLAN IMPORT
                             <br />
                             <v-progress-circular
-                                v-if="ImportCircular == true"
+                                v-if="PlanImportCircular == true"
                                 color="primary"
                                 indeterminate
-                                :size="36"
+                                :size="40"
                                 :width="8"
                                 ></v-progress-circular>
-                            <p v-if="ImportCircular == false">{{ PlanningInbound.IMPORT }}</p>
+                            <p v-if="PlanImportCircular == false">{{ PlanningInbound.IMPORT }}</p>
                         </h4>
                     </div>
                     <div class="Grid-Item-1">
@@ -49,7 +50,14 @@
                         <h4>
                             PLAN LOCAL
                             <br />
-                            <p>{{ PlanningInbound.LOCAL }}</p>
+                            <v-progress-circular
+                                v-if="PlanLocalCircular == true"
+                                color="primary"
+                                indeterminate
+                                :size="40"
+                                :width="8"
+                                ></v-progress-circular>
+                            <p v-if="PlanLocalCircular == false">{{ PlanningInbound.LOCAL }}</p>
                         </h4>
                     </div>
                     <div class="Grid-Item-1">
@@ -57,7 +65,14 @@
                         <h4>
                             PLAN MPP
                             <br />
-                            <p>{{ PlanningInbound.MHE }}</p>
+                            <v-progress-circular
+                                v-if="PlanMppCircular == true"
+                                color="primary"
+                                indeterminate
+                                :size="40"
+                                :width="8"
+                                ></v-progress-circular>
+                            <p v-if="PlanMppCircular == false">{{ PlanningInbound.MHE }}</p>
                         </h4>
 
                     </div>
@@ -66,7 +81,14 @@
                         <h4>
                             PLAN MHE
                             <br />
-                            <p>{{ PlanningInbound.RF }}</p>
+                            <v-progress-circular
+                                v-if="PlanMheCircular == true"
+                                color="primary"
+                                indeterminate
+                                :size="40"
+                                :width="8"
+                                ></v-progress-circular>
+                            <p v-if="PlanMheCircular == false">{{ PlanningInbound.RF }}</p>
                         </h4>
 
                     </div>
@@ -75,7 +97,14 @@
                         <h4>
                             PLAN RF
                             <br />
-                            <p>{{ PlanningInbound.MPP }}</p>
+                            <v-progress-circular
+                                v-if="PlanRfCircular == true"
+                                color="primary"
+                                indeterminate
+                                :size="40"
+                                :width="8"
+                                ></v-progress-circular>
+                            <p v-if="PlanRfCircular == false">{{ PlanningInbound.MPP }}</p>
                         </h4>
                     </div>
                 </div>
@@ -87,10 +116,17 @@
                             </div>
                             <div class="Card-Body-Chart" style="display:flex;" >
                                 <div class="Chartbox" >
-                                    <ejs-chart id="container" :primaryXAxis='primaryXAxis' :legendSettings='legendSettings'>
+                                    <v-progress-circular
+                                    v-if="WorkingProgressCircular == true"
+                                    color="primary"
+                                    indeterminate
+                                    :size="440"
+                                    :width="30"
+                                    ></v-progress-circular>
+                                    <ejs-chart v-if="WorkingProgressCircular == false" id="container" :primaryXAxis='primaryXAxis' :legendSettings='legendSettings'>
                                         <e-series-collection>
-                                            <e-series :dataSource='this.WorkingProgressImport' type='Bar' xName='LIST_PROCESS' yName='VALUE' name='IMPORT' :marker='marker'> </e-series>
-                                            <e-series :dataSource='this.WorkingProgressLocal' type='Bar' xName='LIST_PROCESS' yName='VALUE' name='LOCAL' :marker='marker'> </e-series>
+                                            <e-series :dataSource='this.WorkingProgressImport' type='Bar' xName='LIST_PROCESS' yName='VALUE' name='IMPORT'  :pointColorMapping='pointColorMapping' :marker='marker'> </e-series>
+                                            <e-series :dataSource='this.WorkingProgressLocal' type='Bar' xName='LIST_PROCESS' yName='VALUE' name='LOCAL'  :pointColorMapping='pointColorMapping' :marker='marker'> </e-series>
                                         </e-series-collection>
                                     </ejs-chart>
                                 </div>
@@ -98,17 +134,83 @@
                                     <div class="Header-Grid-Item-3">
                                         <a>WORKING PROGRESS DETAIL</a>
                                     </div>
+                                        <n-button  class="btnlist" @click="WorkingProgresPartClicked" value="WAITING ARRIVAL (ON SCHEDULE)">WAITING ARRIVAL (ON SCHEDULE)</n-button>
+                                        <n-button  class="btnlist" @click="WorkingProgresPartClicked" value="WAITING ARRIVAL (DELAYED)" >WAITING ARRIVAL (DELAYED)</n-button>
+                                        <n-button  class="btnlist" @click="WorkingProgresPartClicked" value="WAITING TO UNLOAD (ON SCHEDULE)" >WAITING TO UNLOAD (ON SCHEDULE)</n-button>
+                                        <n-button  class="btnlist" @click="WorkingProgresPartClicked" value="WAITING TO UNLOAD (DELAYED)" >WAITING TO UNLOAD (DELAYED)</n-button>
+                                        <n-button  class="btnlist" @click="WorkingProgresPartClicked" value="UNLOADING (ON GOING)" >UNLOADING (ON GOING)</n-button>
+                                        <n-button  class="btnlist" @click="WorkingProgresPartClicked" value="UNLOADING (DELAYED)" >UNLOADING (DELAYED)</n-button>
+                                        <n-button  class="btnlist" @click="WorkingProgresPartClicked" value="WAITING TO CHECKOUT (ON GOING)" >WAITING TO CHECKOUT (ON GOING)</n-button>
+                                        <n-button  class="btnlist" @click="WorkingProgresPartClicked" value="WAITING TO CHECKOUT (DELAYED)" >WAITING TO CHECKOUT (DELAYED)</n-button>
+                                        <n-button  class="btnlist" @click="WorkingProgresPartClicked" value="CHECKED OUT" >CHECKED OUT</n-button>
+                                        <n-modal v-model:show="WorkingProgresPartDialog">
+                                            <n-card
+                                            style="width: auto;height: auto;overflow: auto;"
+                                            v-bind:title="this.BtnWorkingProgress"
+                                            :bordered="false"
+                                            size="huge"
+                                            role="dialog"
+                                            aria-modal="true"
+                                            >
+                                            <template #header-extra>
+                                                <n-button @click="WorkingProgresPartDialog = false">
+                                                    X
+                                                </n-button>
+                                            </template>
+                                            <v-table style="height: 600px;">
+                                                <thead>
+                                                <tr>
+                                                    <th style="font-size:15px;">TYPE</th>
+                                                    <th style="font-size:15px;">PIB</th>
+                                                    <th style="font-size:15px;">VENDOR</th>
+                                                    <th style="font-size:15px;">CONTAINER</th>
+                                                    <th style="font-size:15px;">WEIGHT</th>
+                                                    <th style="font-size:15px;">CBM</th>
+                                                    <th style="font-size:15px;">DESCRIPTION</th>
+                                                    <th style="font-size:15px;">PLANARRIVALDATE</th>
+                                                    <th style="font-size:15px;">WT</th>
+                                                    <th style="font-size:15px;">TIMING</th>
+                                                    <th style="font-size:15px;">STATUS</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
 
-                                    <input type="button" class="btnlist" value="WAITING ARRIVAL (ON SCHEDULE)" /> 
-                                    <input type="button" class="btnlist" value="WAITING ARRIVAL (DELAYED)" /> 
-                                    <input type="button" class="btnlist" value="WAITING TO UNLOAD (ON SCHEDULE)" /> 
-                                    <input type="button" class="btnlist" value="WAITING TO UNLOAD (DELAY)" /> 
-                                    <input type="button" class="btnlist" value="UNLOADING (ON GOING)" /> 
-                                    <input type="button" class="btnlist" value="UNLOADING (DELAY)" /> 
-                                    <input type="button" class="btnlist" value="WAITING TO CHECKOUT (ON GOING)" /> 
-                                    <input type="button" class="btnlist" value="WAITING TO CHECKOUT (DELAY)" /> 
-                                    <input type="button" class="btnlist" value="CHECKED OUT" /> 
-
+                                                <tr v-if="this.WorkingProgressTblStats == false"
+                                                     v-for="item in this.WORKINGDETAILUNLOADING"
+                                                    :key="item.TYPE"
+                                                >
+                                                    <td>{{ item.TYPE }}</td>
+                                                    <td>{{ item.PIB }}</td>
+                                                    <td>{{ item.VENDOR }}</td>
+                                                    <td>{{ item.CONTAINER }}</td>
+                                                    <td>{{ item.WEIGHT }}</td>
+                                                    <td>{{ item.CBM }}</td>
+                                                    <td>{{ item.DESCRIPTION }}</td>
+                                                    <td>{{ item.PLANARRIVALDATE }}</td>
+                                                    <td>{{ item.WT }}</td>
+                                                    <td>{{ item.TIMING }}</td>
+                                                    <td>{{ item.STATUS }}</td>
+                                                </tr>
+                                                <tr v-if="this.WorkingProgressTblStats == true"                                                >
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                </tbody>
+                                            </v-table>
+                                            <template #footer>
+                                                Footer
+                                            </template>
+                                            </n-card>
+                                        </n-modal>
                                 </div>
 
                             </div>
@@ -123,23 +225,53 @@
                                     <div class="Chart-Body-Achivement">
                                         <div class="Achiment-Item"> 
                                             <a class="Header-Achivemnt">PROCESS</a>
-                                            <a class="Content-Achivemnt">{{ ACHIVEMENT_UNLOADING.PROCESS }}</a>
+                                            <v-progress-circular
+                                            v-if="AchProcessCircular == true"
+                                            color="primary"
+                                            indeterminate
+                                            :size="90"
+                                            :width="10"
+                                            ></v-progress-circular>
+                                            <a v-if="AchProcessCircular == false" class="Content-Achivemnt">{{ ACHIVEMENT_UNLOADING.PROCESS }}</a>
                                         </div>                                
                                         <div class="Achiment-Item">
                                             <a class="Header-Achivemnt">DONE</a>
-                                            <a class="Content-Achivemnt">{{ ACHIVEMENT_UNLOADING.DONE }}</a>
+                                            <v-progress-circular
+                                            v-if="AchDoneCircular == true"
+                                            color="primary"
+                                            indeterminate
+                                            :size="90"
+                                            :width="10"
+                                            ></v-progress-circular>
+                                            <a v-if="AchDoneCircular == false" class="Content-Achivemnt">{{ ACHIVEMENT_UNLOADING.DONE }}</a>
 
                                         </div>                                
                                         <div class="Achiment-Item">
                                             <a class="Header-Achivemnt">TOTAL</a>
-                                            <a class="Content-Achivemnt">{{ ACHIVEMENT_UNLOADING.TOTAL }}</a>
+                                            <v-progress-circular
+                                            v-if="AchTotalCircular == true"
+                                            color="primary"
+                                            indeterminate
+                                            :size="90"
+                                            :width="10"
+                                            ></v-progress-circular>
+
+                                            <a v-if="AchTotalCircular == false" class="Content-Achivemnt">{{ ACHIVEMENT_UNLOADING.TOTAL }}</a>
                                         </div>
                                     </div>
 
                                         <div class="Box-percentage">
                                             <a class="Header-Achivemnt">PERCENTAGE</a>
                                             <br/>
-                                            <v-progress-circular :rotate="360" :size="160" :width="30" :model-value="this.ACHIVEMENT_UNLOADING.PERCENTAGE" color="teal">
+                                            <v-progress-circular
+                                            v-if="AchPercentageCircular == true"
+                                            color="primary"
+                                            indeterminate
+                                            :size="150"
+                                            :width="15"
+                                            ></v-progress-circular>
+
+                                            <v-progress-circular v-if="AchPercentageCircular == false" :rotate="360" :size="160" :width="30" :model-value="this.ACHIVEMENT_UNLOADING.PERCENTAGE" color="teal">
                                             <template v-slot:default> {{ this.ACHIVEMENT_UNLOADING.PERCENTAGE }} % </template>
                                             </v-progress-circular>
                                         </div>
@@ -147,7 +279,54 @@
                             </div>
                         </div>
                     </div>
+                    <div class="Grid-Container-3">
+                        <div class="Grid-Item-3_a">
+                        <div class="Header-Grid-Item-2">
+                            <a>PRODUCTIVITY UNLOADING</a>
+                        </div>
+                        <v-table>
+                            <thead>
+                            <tr>
+                                <th style="font-size:15px;">SHIFT</th>
+                                <th style="font-size:15px;">TEAM</th>
+                                <th style="font-size:15px;">NIK TEAM LEADER</th>
+                                <th style="font-size:15px;">NAMA TEAM LEADER</th>
+                                <th style="font-size:15px;">TARGET TEAM</th>
+                                <th style="font-size:15px;">ACTUAL TEAM</th>
+                                <th style="font-size:15px;">LPN RECEIVED</th>
+                                <th style="font-size:15px;">PERCENTAGE</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr v-if="this.ProductivityUnloadTblStats == false"
+                                v-for="item in this.PRODUCTIVITYUNLOADING"
+                                :key="item.SHIFT"
+                            >
+                                <td>{{ item.SHIFT }}</td>
+                                <td>{{ item.TEAM }}</td>
+                                <td>{{ item.NIK_TEAM_LEADER }}</td>
+                                <td>{{ item.NAMA_TEAM_LEADER }}</td>
+                                <td>{{ item.TARGET_TEAM }}</td>
+                                <td>{{ item.ACTUAL_TEAM }}</td>
+                                <td>{{ item.LPN }}</td>
+                                <td>{{ item.PERCENTAGE }}</td>
+                            </tr>
+                            <tr  v-if="this.ProductivityUnloadTblStats == true">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </v-table>
+                    </div>
                 </div>
+            </div>
                 </v-window-item>
 
                 <v-window-item value="two">
@@ -164,13 +343,15 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import { NButton } from 'naive-ui'
 import { NDatePicker } from "naive-ui";
+import { NModal } from "naive-ui";
+import { NCard } from "naive-ui";
 import axios from 'axios';
 import {ChartComponent, SeriesCollectionDirective, SeriesDirective,BarSeries ,Category ,DataLabel ,Legend } from "@syncfusion/ej2-vue-charts";
-
-    const BaseUrl = 'https://apiblazor.sanstech.online/';
-    const BASE_UNLOADING_FETCH_DATA = 'API/HCI/INBOUND/InboundSpRunning/&aqoonsiHCIJBK/&TAARIIKHDA';
+import * as StringClass from '~/assets/js/Models/StringClass.js';
+import * as ApiLink from '~/assets/js/Models/ApiLink.js';
 
     definePageMeta({
         layout:'sidebar'
@@ -178,10 +359,20 @@ import {ChartComponent, SeriesCollectionDirective, SeriesDirective,BarSeries ,Ca
     export default defineComponent({
         components: {
             NDatePicker,
+            NButton,
+            NModal,
+            NCard,
             'ejs-chart': ChartComponent,
             'e-series-collection': SeriesCollectionDirective,
             'e-series': SeriesDirective
     },
+    setup() {
+    return {
+        WorkingProgresPartDialog: ref(false),
+        WorkingProgressTblStats:ref(false),
+        ProductivityUnloadTblStats:ref(false)
+    };
+  },
     data: () => ({
       tab: null,
       date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substring(0, 10),
@@ -197,7 +388,16 @@ import {ChartComponent, SeriesCollectionDirective, SeriesDirective,BarSeries ,Ca
         RF : '',
         MPP : ''
       }],
-    ImportCircular: true,
+    PlanImportCircular: true,
+    PlanLocalCircular: true,
+    PlanMppCircular: true,
+    PlanMheCircular: true,
+    PlanRfCircular: true,
+    WorkingProgressCircular: true,
+    AchProcessCircular: true,
+    AchDoneCircular: true,
+    AchTotalCircular: true,
+    AchPercentageCircular: true,
     WorkingProgressImport:[{
         LIST_PROCESS:'',
         VALUE: '',
@@ -214,6 +414,31 @@ import {ChartComponent, SeriesCollectionDirective, SeriesDirective,BarSeries ,Ca
         TOTAL:'',
         PERCENTAGE:Number,
     }],
+    PRODUCTIVITYUNLOADING:[{
+        SHIFT:'',
+        TEAM:'',
+        NIK_TEAM_LEADER:'',
+        NAMA_TEAM_LEADER:'',
+        TARGET_TEAM:Number,
+        ACTUAL_TEAM:Number,
+        LPN:Number,
+        PROGRES:Number
+    }],
+    WORKINGDETAILUNLOADING:[{
+        TYPE:'',
+        PIB:'',
+        VENDOR:'',
+        CONTAINER:'',
+        WEIGHT:'',
+        CBM:'',
+        DESCRIPTION:'',
+        PLANARRIVALDATE:'',
+        WT:'',
+        TIMING:'',
+        STATUS:''
+    }],
+    BtnWorkingProgress:'',
+    pointColorMapping:"FILL",
     primaryXAxis: {
            valueType: 'Category'
         },
@@ -231,33 +456,154 @@ import {ChartComponent, SeriesCollectionDirective, SeriesDirective,BarSeries ,Ca
         chart: [BarSeries ,Category ,DataLabel ,Legend ]
     },
     methods:{
+        WorkingProgresPartClicked(value)
+        {
+            this.BtnWorkingProgress = value.target.value;
+
+            if(this.BtnWorkingProgress == 'WAITING ARRIVAL (ON SCHEDULE)')
+            {
+                this.WorkingProgresPartDialog = true;
+                this.FetchDataWorkingProgressUnloadingPart.call();
+            }
+            if(this.BtnWorkingProgress == 'WAITING ARRIVAL (DELAYED)')
+            {
+                this.WorkingProgresPartDialog = true;
+                this.FetchDataWorkingProgressUnloadingPart.call();
+            }
+            if(this.BtnWorkingProgress == 'WAITING TO UNLOAD (ON SCHEDULE)')
+            {
+                this.WorkingProgresPartDialog = true;
+                this.FetchDataWorkingProgressUnloadingPart.call();
+            }
+            if(this.BtnWorkingProgress == 'WAITING TO UNLOAD (DELAYED)')
+            {
+                this.WorkingProgresPartDialog = true;
+                this.FetchDataWorkingProgressUnloadingPart.call();
+            }
+            if(this.BtnWorkingProgress == 'UNLOADING (ON GOING)')
+            {
+                this.WorkingProgresPartDialog = true;
+                this.FetchDataWorkingProgressUnloadingPart.call();
+            }
+            if(this.BtnWorkingProgress == 'UNLOADING (DELAYED)')
+            {
+                this.WorkingProgresPartDialog = true;
+                this.FetchDataWorkingProgressUnloadingPart.call();
+            }
+            if(this.BtnWorkingProgress == 'WAITING TO CHECKOUT (ON GOING)')
+            {
+                this.WorkingProgresPartDialog = true;
+                this.FetchDataWorkingProgressUnloadingPart.call();
+            }
+            if(this.BtnWorkingProgress == 'WAITING TO CHECKOUT (DELAYED)')
+            {
+                this.WorkingProgresPartDialog = true;
+                this.FetchDataWorkingProgressUnloadingPart.call();
+            }
+            if(this.BtnWorkingProgress == 'CHECKED OUT')
+            {
+                this.WorkingProgresPartDialog = true;
+                this.FetchDataWorkingProgressUnloadingPart.call();
+            }
+        },
+        ChangestatusboolFalseCircularPlan()
+        {
+            this.PlanImportCircular = false;
+            this.PlanLocalCircular = false;
+            this.PlanMppCircular = false;
+            this.PlanMheCircular = false;
+            this.PlanRfCircular = false;
+        },
+        ChangestatusboolTrueCircular()
+        {
+            this.PlanImportCircular = true;
+            this.PlanLocalCircular = true;
+            this.PlanMppCircular = true;
+            this.PlanMheCircular = true;
+            this.PlanRfCircular = true;
+            this.AchProcessCircular = true;
+            this.AchDoneCircular = true;
+            this.AchTotalCircular = true;
+            this.AchPercentageCircular = true;
+            this.WorkingProgressCircular = true;
+        },
+        ChangestatusboolFalseCircularAch()
+        {
+            this.AchProcessCircular = false;
+            this.AchDoneCircular = false;
+            this.AchTotalCircular = false;
+            this.AchPercentageCircular = false;
+
+        },
         FirstApper()
         {
             let yourDate = new Date()
             this.formattedValue = yourDate.toISOString().split('T')[0];
+            
         },
-
+        async FetchDataWorkingProgressUnloadingPart()
+        {
+            await axios.get(ApiLink.BaseUrlApi + ApiLink.BASE_UNLOADING_FETCH_DATA_DETAIL + this.formattedValue + ApiLink.WORKING_PROGRESS_DETAIL_PART + this.BtnWorkingProgress + '/').then(Response =>{
+                this.WORKINGDETAILUNLOADING = Response.data;
+                if(Response.data == 'DATA NOT FOUND')
+                {
+                    this.WorkingProgressTblStats = true;
+                }
+                else
+                {
+                    this.WorkingProgressTblStats = false;
+                }
+            })
+        },
         async LoadData()
         {
-            await axios.get(BaseUrl + BASE_UNLOADING_FETCH_DATA +this.formattedValue+'/&XULASHADATALOImport/&PARAAMETER1/').then(Response =>{
+            
+            await axios.get(ApiLink.BaseUrlApi + ApiLink.BASE_UNLOADING_FETCH_DATA +this.formattedValue + ApiLink.PLAN_UNLOADING).then(Response =>{
                 this.PlanningInbound = Response.data[0];
-                    this.ImportCircular = false;
+                    this.ChangestatusboolFalseCircularPlan.call();
             }),
-            await axios.get(BaseUrl + BASE_UNLOADING_FETCH_DATA + this.formattedValue + '/&XULASHADATALOImport/&PARAAMETER2/').then(response =>{
+            await axios.get(ApiLink.BaseUrlApi + ApiLink.BASE_UNLOADING_FETCH_DATA + this.formattedValue + ApiLink.WORKING_PROGRESS_IMPORT).then(response =>{
                 this.WorkingProgressImport = response.data;
             }),
-            await axios.get(BaseUrl + BASE_UNLOADING_FETCH_DATA + this.formattedValue + '/&XULASHADATALOLocal/&PARAAMETER2/').then(response =>{
+            await axios.get(ApiLink.BaseUrlApi + ApiLink.BASE_UNLOADING_FETCH_DATA + this.formattedValue + ApiLink.WORKING_PROGRESS_LOCAL).then(response =>{
                 this.WorkingProgressLocal = response.data;
+                this.WorkingProgressCircular = false;
             }),
-            await axios.get(BaseUrl + BASE_UNLOADING_FETCH_DATA + this.formattedValue + '/&XULASHADATALOImport/&PARAAMETER3/').then(response =>{
+            await axios.get(ApiLink.BaseUrlApi + ApiLink.BASE_UNLOADING_FETCH_DATA + this.formattedValue + ApiLink.ACHIVEMENT_UNLOADING).then(response =>{
                 this.ACHIVEMENT_UNLOADING = response.data[0];
+                this.ChangestatusboolFalseCircularAch.call();
+            }),
+            await axios.get(ApiLink.BaseUrlApi +ApiLink.BASE_UNLOADING_FETCH_DATA + this.formattedValue + ApiLink.PRODUCTIVITY_UNLOADING).then(response =>{
+                this.PRODUCTIVITYUNLOADING = response.data;
+                if(response.data == 'DATA NOT FOUND')
+                {
+                    this.ProductivityUnloadTblStats = true;
+                }
+                else
+                {
+                    this.ProductivityUnloadTblStats = false;
+                }
+                
             })
-            
+        },
+        RefrshBtn()
+        {
+            this.ChangestatusboolTrueCircular.call();
+            this.LoadData.call();
         }
     },
     mounted (){
         this.FirstApper.call();
-        this.LoadData.call();
+        if(StringClass.default.data.WHSEID == '')
+        {
+
+        }
+        else
+        {
+            ApiLink.default.methods.GetallApiLink.apply();
+            this.LoadData.call();
+        }
+        
     }
   })
 </script>
