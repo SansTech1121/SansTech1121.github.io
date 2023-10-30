@@ -120,13 +120,13 @@
                                     v-if="WorkingProgressCircular == true"
                                     color="primary"
                                     indeterminate
-                                    :size="440"
+                                    :size="400"
                                     :width="30"
                                     ></v-progress-circular>
-                                    <ejs-chart v-if="WorkingProgressCircular == false" id="container" :primaryXAxis='primaryXAxis' :legendSettings='legendSettings'>
+                                    <ejs-chart  v-if="WorkingProgressCircular == false" id="container" width='100%' height="90%" :primaryXAxis='primaryXAxis' :legendSettings='legendSettings'>
                                         <e-series-collection>
-                                            <e-series :dataSource='this.WorkingProgressImport' type='Bar' xName='LIST_PROCESS' yName='VALUE' name='IMPORT'  :pointColorMapping='pointColorMapping' :marker='marker'> </e-series>
-                                            <e-series :dataSource='this.WorkingProgressLocal' type='Bar' xName='LIST_PROCESS' yName='VALUE' name='LOCAL'  :pointColorMapping='pointColorMapping' :marker='marker'> </e-series>
+                                            <e-series :dataSource='this.WorkingProgressImport' type='Bar' xName='LIST_PROCESS' yName='VALUE' name='IMPORT'  :pointColorMapping='pointColorMapping' :marker='marker' columnSpacing="1.7" columnWidth="1.25"> </e-series>
+                                            <e-series :dataSource='this.WorkingProgressLocal' type='Bar' xName='LIST_PROCESS' yName='VALUE' name='LOCAL'  :pointColorMapping='pointColorMapping' :marker='marker' columnSpacing="1.7" columnWidth="1.25"> </e-series>
                                         </e-series-collection>
                                     </ejs-chart>
                                 </div>
@@ -287,14 +287,14 @@
                         <v-table>
                             <thead>
                             <tr>
-                                <th style="font-size:15px;">SHIFT</th>
-                                <th style="font-size:15px;">TEAM</th>
-                                <th style="font-size:15px;">NIK TEAM LEADER</th>
-                                <th style="font-size:15px;">NAMA TEAM LEADER</th>
-                                <th style="font-size:15px;">TARGET TEAM</th>
-                                <th style="font-size:15px;">ACTUAL TEAM</th>
-                                <th style="font-size:15px;">LPN RECEIVED</th>
-                                <th style="font-size:15px;">PERCENTAGE</th>
+                                <th style="font-size:10px;text-align:center;font-weight: 900;">SHIFT</th>
+                                <th style="font-size:10px;text-align:center;font-weight: 900;">TEAM</th>
+                                <th style="font-size:10px;text-align:center;font-weight: 900;">NIK TEAM LEADER</th>
+                                <th style="font-size:10px;text-align:center;font-weight: 900;">NAMA TEAM LEADER</th>
+                                <th style="font-size:10px;text-align:center;font-weight: 900;">TARGET TEAM</th>
+                                <th style="font-size:10px;text-align:center;font-weight: 900;">ACTUAL TEAM</th>
+                                <th style="font-size:10px;text-align:center;font-weight: 900;">LPN RECEIVED</th>
+                                <th style="font-size:10px;text-align:center;font-weight: 900;">PERCENTAGE</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -349,7 +349,7 @@ import { NDatePicker } from "naive-ui";
 import { NModal } from "naive-ui";
 import { NCard } from "naive-ui";
 import axios from 'axios';
-import {ChartComponent, SeriesCollectionDirective, SeriesDirective,BarSeries ,Category ,DataLabel ,Legend } from "@syncfusion/ej2-vue-charts";
+import {ChartPlugin, ChartComponent, SeriesCollectionDirective, SeriesDirective,BarSeries ,Category ,DataLabel ,Legend } from "@syncfusion/ej2-vue-charts";
 import * as StringClass from '~/assets/js/Models/StringClass.js';
 import * as ApiLink from '~/assets/js/Models/ApiLink.js';
 
@@ -440,6 +440,10 @@ import * as ApiLink from '~/assets/js/Models/ApiLink.js';
     BtnWorkingProgress:'',
     pointColorMapping:"FILL",
     primaryXAxis: {
+        labelStyle: {
+            size: '10px', color: 'Black',
+            position:'left'
+           },
            valueType: 'Category'
         },
         marker: {
@@ -449,7 +453,7 @@ import * as ApiLink from '~/assets/js/Models/ApiLink.js';
                 legendSettings: {
                 visible: true,
                 position: 'Custom',
-                location: { x: 410, y: 10 }
+                location: { x: 300, y: 10 }
         },
     }),
     provide:{
@@ -611,4 +615,6 @@ import * as ApiLink from '~/assets/js/Models/ApiLink.js';
 
 <style>
 @import '~/assets/css/inboundBase.css'; 
+@import '~/assets/css/FontStyle.css';
+
 </style>    

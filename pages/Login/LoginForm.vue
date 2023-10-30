@@ -174,4 +174,6 @@ mounted (){
 
 <style scoped>
 @import '~/assets/css/loginform.css';
+@import '~/assets/css/FontStyle.css';
+
 </style>

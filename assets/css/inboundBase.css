@@ -9,16 +9,16 @@
     display: grid;
     grid-template-columns: auto auto auto auto auto;
     height: auto;
-    margin: 10px auto;
-    width:max-content;
+    margin: auto;
+    width:fit-content;
 }
 
 .Grid-Item-1 {
     display: flex;
     border: 2px solid #c9c9c9;
-    margin: 10px 50px 10px 50px;
+    margin: 10px 10px 10px 10px;
     height: 65px;
-    width: 220px;
+    width: 190px;
     border-radius: 5px;
 }
 
@@ -58,15 +58,15 @@
     grid-template-columns: auto auto;
     height: auto;
     margin: 10px auto;
-    width:max-content;
+    width:100%;
 }
 
 .Grid-Item-2 {
-    width: max-content;
+    width: auto;
     border: 2px solid #c9c9c9;
-    margin: 10px;
+    margin: 5px;
     position: center;
-    height: 480px;
+    height: 430px;
 }
 
 .Header-Grid-Item-2 {
@@ -79,7 +79,7 @@
         font-size: 20px;
         font: bold;
         margin: auto;
-        font-weight: bolder;
+        font-weight:500;
     }
 .Header-Grid-Item-3 {
     display: flex;
@@ -95,27 +95,28 @@
         font-size: 15px;
         font: bold;
         margin: auto;
-        font-weight:bolder;
+        font-weight:500;
     }
-.table th {
+.v-table th {
      text-align:center;
+     
 }
 .table td {
     font-size: 14px;
 }
 
 .Card-Body-Chart {
-    margin-left: auto;
-    margin-right: auto;
     text-align: center;
     font-size: 40px;
-    width:max-content;
-    height:450px;
-    padding:1px;
+    width:auto;
+    height:400px;
+    padding:0px;
 }
-        .Chartbox{
-    height:450px;
-    width:650px;
+
+    .Chartbox{
+    height:auto;
+    min-width: 500px;
+    max-width: 650px;
 }
     .Chartbox:hover {
         background-color: #e4e4e4;
@@ -124,12 +125,12 @@
 .Chart-Body-Achivement{
     display:grid;
     grid-template-columns:auto auto auto;
-    width:max-content;
-    margin:50px auto;
+    width:auto;
+    margin:20px auto;
 }
 
 .Achiment-Item {
-    width: 180px;
+    width: 90%;
     border: 2px solid #c9c9c9;
     margin: 5px;
     position: center;
@@ -141,9 +142,9 @@
     color: #ffffff;
     font-size: 20px;
     font: bold;
-    font-weight: bolder;
+    font-weight:500;
     border: 2px solid #ffffff;
-    border-radius: 10px;
+    border-radius: 5px;
     width:auto;
     height:auto;
 }
@@ -151,7 +152,7 @@
     display:flex;
     font-size:50px;
     font:bold;
-    font-weight:bolder;
+    font-weight:500;
     justify-content:center;
     margin-top:30px;
 }
@@ -173,27 +174,33 @@
     margin: 10px;
     height: auto;
     border: solid 2px #e4e4e4;
+    width: auto;
 }
 .btnlist {
     font-size: 12px;
-    width: 240px;
+    width: 100%;
     border: solid 2px #c9c9c9;
-    height: 41px;
+    height: 30px;
     font-weight: bold;
     border-radius: 5px;
-    text-align: left;
     padding: 1px 1px 1px 10px;
 }
 
     .btnlist:hover {
         background-color: #e4e4e4;
     }
+    .btnlist a{
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
 
 .Grid-Container-3 {
     display: grid;
     grid-template-columns: auto;
     height: auto;
-    margin: 10px;
+    margin: auto;
+
 }
 
 .Grid-Item-3 {

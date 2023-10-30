@@ -1,5 +1,7 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 export default defineNuxtConfig({
+  ssr:false,
+  //...
   build: {
     transpile:process.env.NODE_ENV === 'production'
     ? [
@@ -10,7 +12,6 @@ export default defineNuxtConfig({
       ]
     : ['@juggle/resize-observer'] && ['vuetify']
   },
-  
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
@@ -27,6 +28,7 @@ export default defineNuxtConfig({
           ? ['naive-ui', 'vueuc', 'date-fns-tz/formatInTimeZone']
           : []
     },
+    
     vue: {
       template: {
         transformAssetUrls,

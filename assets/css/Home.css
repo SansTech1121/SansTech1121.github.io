@@ -1,12 +1,16 @@
-.ContainerBox{
-    height: 100%;
-}
-.ContainerBoxItem{
-    height: 100%;
-}
 
-.ImgBox{
-    width: 100%;
-    height: 900px;
-    border-radius: 15px;
+/* For Desktop View */
+@media screen and (min-width: 1024px) {
+    .ContainerBox{
+        height: fit-content;
+    }
+    .ContainerBoxItem{
+        height: fit-content;
+    }
+    
+    .ImgBox{
+        width: 1263px;
+        height: 675px;
+        border-radius: 15px;
+    }
 }
